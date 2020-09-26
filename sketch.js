@@ -32,13 +32,13 @@ function preload(){
 }
 
 function setup(){
-createCanvas(1200,700);
-bgsprite=createSprite(600,250,1200,700);
+createCanvas(windowWidth,windowHeight);
+bgsprite=createSprite(width/2,height/2,1200,700);
 bgsprite.addImage("backgrounds",bgimage2);
 bgsprite.velocityX=-6;
 
 
-bgsprite.scale=2;
+bgsprite.scale=2.2;
 
 theif=createSprite(200,200,20,20);
 theif.addAnimation("run",theifrun);
