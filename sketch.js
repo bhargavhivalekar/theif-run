@@ -40,7 +40,7 @@ bgsprite.velocityX=-6;
 
 bgsprite.scale=2.2;
 
-theif=createSprite(200,200,20,20);
+theif=createSprite(200,600,20,20);
 theif.addAnimation("run",theifrun);
 theif.scale=2;
 velocityY=velocityY=0.2
@@ -54,7 +54,7 @@ police=createSprite(60,200,20,20);
   police.scale=0.7;
 
 
-
+coingroup=new Group();
 obstacleGroup =new Group();
 
 
@@ -65,8 +65,15 @@ invisibleGround.visible=false;
 
 
 function draw(){
-obstacle();
+
+  obstacle();
 if(gamestate === "Play"){
+ 
+  if(coingroup.isTouching(theif)){
+    coinsound.play();
+    coin.destroy();
+    coins();
+    }
 if(keyDown("space") && theif.y>600 ){
   theif.velocityY=-5;
   }
@@ -90,6 +97,7 @@ police.addAnimation("policecaught",policecaught);
 theif.addAnimation("run",theifcaught);
 police.x=theif.x-80
 obstacleGroup.setVelocityXEach(0);
+coingroup.setVelocityXEach(0);
 }
   theif.velocityY=theif.velocityY+0.1;
   theif.collide(invisibleGround);
@@ -110,6 +118,9 @@ function obstacle(){
     }
     if(ran === 3){
       trashcans();
+    }
+    if(ran2 === 2){
+      coins();
     }
   }
   
@@ -142,4 +153,14 @@ trashcan.scale=0.3;
 trashcan.velocityX=-6;
 obstacleGroup.add(trashcan);
 }
-
+function coins(){
+  if(frameCount% 50 === 0){
+    coin=createSprite(1200,550,20,20);
+    coin.addImage("coin",coinimg);
+    coin.velocityX=-6;
+    coin.debug=true;
+    coin.setCollider("rectangle",0,0,10,coin.height);
+    coingroup.add(coin);
+  }
+}
+ 
