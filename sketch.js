@@ -66,16 +66,31 @@ invisibleGround.visible=false;
 
 function draw(){
 obstacle();
+if(gamestate === "Play"){
 if(keyDown("space") && theif.y>600 ){
   theif.velocityY=-5;
   }
   if(keyWentUp("space")){
     jumpsound.play();
   }
+  if(obstacleGroup.isTouching(theif)){
+    gamestate="End";
+    }
   if (bgsprite.x<0){
     bgsprite.x=bgsprite.width/2;
 
   }
+}
+if(gamestate === "End"){
+
+
+theif.velocityY=0;
+bgsprite.velocityX=0;	
+police.addAnimation("policecaught",policecaught);
+theif.addAnimation("run",theifcaught);
+police.x=theif.x-80
+obstacleGroup.setVelocityXEach(0);
+}
   theif.velocityY=theif.velocityY+0.1;
   theif.collide(invisibleGround);
   police.y=theif.y;
@@ -116,6 +131,7 @@ function postboxs(){
     postbox.addImage("postbox",postboximg);
       postbox.scale=1.1;
       postbox.velocityX=-6;
+      
  // }
  obstacleGroup.add(postbox);
 }
