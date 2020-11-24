@@ -66,9 +66,9 @@ invisibleGround.visible=false;
 
 function draw(){
 
-  obstacle();
+  
 if(gamestate === "Play"){
- 
+  obstacle();
   if(coingroup.isTouching(theif)){
     coinsound.play();
     coin.destroy();
