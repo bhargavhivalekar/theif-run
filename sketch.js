@@ -54,7 +54,7 @@ police=createSprite(60,200,20,20);
   police.scale=0.7;
 
 
-coingroup =new Group();
+
 obstacleGroup =new Group();
 
 
@@ -65,26 +65,49 @@ invisibleGround.visible=false;
 
 
 function draw(){
-  theif.velocityY
-
+obstacle();
+if(keyDown("space") && theif.y>600 ){
+  theif.velocityY=-5;
+  }
+  if(keyWentUp("space")){
+    jumpsound.play();
+  }
   if (bgsprite.x<0){
     bgsprite.x=bgsprite.width/2;
 
   }
-
+  theif.velocityY=theif.velocityY+0.1;
+  theif.collide(invisibleGround);
+  police.y=theif.y;
   drawSprites();
 }
 
 
+function obstacle(){
+  var ran2=Math.round(random(1,2));
+  var ran=Math.round(random(1,3));
+  if(frameCount% 200 === 0){
+    if(ran === 1 ){
+      firehydrants();
+    }
+    if(ran === 2){
+      postboxs();
+    }
+    if(ran === 3){
+      trashcans();
+    }
+  }
+  
+  
+}
  function firehydrants(){
   //if(frameCount% 100 === 0){
     firehydrant=createSprite(1200,650,20,20);
     firehydrant.addImage("hydrant",firehydrantimg);
     firehydrant.scale=0.3;
-    firehydrant.debug=true;
       firehydrant.velocityX=-6;
      
- // }
+ //}
   obstacleGroup.add(firehydrant);
 }
 function postboxs(){
@@ -104,13 +127,3 @@ trashcan.velocityX=-6;
 obstacleGroup.add(trashcan);
 }
 
-function coins(){
-  if(frameCount% 50 === 0){
-    coin=createSprite(1200,550,20,20);
-    coin.addImage("coin",coinimg);
-    coin.velocityX=-6;
-    coin.debug=true;
-    coin.setCollider("rectangle",0,0,10,coin.height);
-    coingroup.add(coin);
-  }
-}
