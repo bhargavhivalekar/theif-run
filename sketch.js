@@ -107,7 +107,7 @@ coingroup.setVelocityXEach(0);
 
 
 function obstacle(){
-  var ran2=Math.round(random(1,2));
+  var ran2=Math.round(random(1,3));
   var ran=Math.round(random(1,3));
   if(frameCount% 200 === 0){
     if(ran === 1 ){
