@@ -43,6 +43,7 @@ bgsprite.scale=2.2;
 theif=createSprite(200,200,20,20);
 theif.addAnimation("run",theifrun);
 theif.scale=2;
+velocityY=velocityY=0.2
 
 theif.setCollider("rectangle",0,0,30,theif.height);
 
@@ -61,6 +62,55 @@ invisibleGround=createSprite(width/2,680,1200,5);
 invisibleGround.visible=false;
 
 }
+
+
 function draw(){
+  theif.velocityY
+
+  if (bgsprite.x<0){
+    bgsprite.x=bgsprite.width/2;
+
+  }
+
   drawSprites();
+}
+
+
+ function firehydrants(){
+  //if(frameCount% 100 === 0){
+    firehydrant=createSprite(1200,650,20,20);
+    firehydrant.addImage("hydrant",firehydrantimg);
+    firehydrant.scale=0.3;
+    firehydrant.debug=true;
+      firehydrant.velocityX=-6;
+     
+ // }
+  obstacleGroup.add(firehydrant);
+}
+function postboxs(){
+  //if(frameCount% 300 === 0){
+    postbox=createSprite(1200,650,20,20);
+    postbox.addImage("postbox",postboximg);
+      postbox.scale=1.1;
+      postbox.velocityX=-6;
+ // }
+ obstacleGroup.add(postbox);
+}
+function trashcans(){
+  trashcan=createSprite(1200,650,20,20);
+trashcan.addImage("trashcan",trashcanimg);
+trashcan.scale=0.3;
+trashcan.velocityX=-6;
+obstacleGroup.add(trashcan);
+}
+
+function coins(){
+  if(frameCount% 50 === 0){
+    coin=createSprite(1200,550,20,20);
+    coin.addImage("coin",coinimg);
+    coin.velocityX=-6;
+    coin.debug=true;
+    coin.setCollider("rectangle",0,0,10,coin.height);
+    coingroup.add(coin);
+  }
 }
